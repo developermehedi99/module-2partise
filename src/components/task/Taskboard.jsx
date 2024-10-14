@@ -16,12 +16,14 @@ const Taskboard = () => {
     const [tasks, setTasks] = useState([initialValue]);
     const [showModal, setShowModal] = useState(false);
 
-    const handleTaskModal=()=>{
-      console.log('hanlde task modal')
+    const handleTaskModal=(newTask)=>{
+      console.log('hanlde task modal', newTask);
+      setTasks([...tasks, newTask]);
+      setShowModal(false);
     }
   return (
     <section className="mb-20" id="tasks">
-      {showModal && <AddTaskModal></AddTaskModal>}
+      {showModal && <AddTaskModal onSave={handleTaskModal}></AddTaskModal>}
       <div className="container">
         <div className="p-2 flex justify-end">
          <SearchTask></SearchTask>
