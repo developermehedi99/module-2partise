@@ -42,6 +42,15 @@ const Taskboard = () => {
       setTaskToUpdate(null);
     }
 
+    const handleDelete=(taskId)=>{
+      const afterDeleteTask = tasks.filter(task => task.id !== taskId);
+      setTasks(afterDeleteTask);
+    }
+    function onDeleteAll(){
+      tasks.length=0;
+      setTasks([...tasks])
+    }
+
   return (
     <section className="mb-20" id="tasks">
       {showModal && <AddTaskModal 
@@ -55,8 +64,8 @@ const Taskboard = () => {
         </div>
 
         <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
-          <TaskAction handleTaskModal={()=> setShowModal(true)}></TaskAction>
-          <TaskList onEdit={handleEditTask} tasks={tasks}></TaskList>
+          <TaskAction onDeleteAll={onDeleteAll} handleTaskModal={()=> setShowModal(true)}></TaskAction>
+          <TaskList onDelete={handleDelete} onEdit={handleEditTask} tasks={tasks}></TaskList>
         </div>
       </div>
     </section>
